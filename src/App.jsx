@@ -7,25 +7,25 @@ const projects = [
     title: 'Sistem Manajemen Anomali',
     stack: 'CodeIgniter 4',
     description:
-      'Aplikasi untuk membantu proses pencatatan, pemantauan, dan pengelolaan anomali secara lebih terstruktur dan efisien.',
+      'Aplikasi pencatatan dan pemantauan anomali operasional agar proses tindak lanjut lebih rapi, terukur, dan mudah dicek kembali.',
   },
   {
     title: 'POS System',
     stack: 'CodeIgniter 4',
     description:
-      'Sistem point of sale yang dirancang untuk membantu transaksi penjualan, pencatatan data, dan monitoring operasional.',
+      'Sistem kasir untuk transaksi penjualan, pengelolaan data produk, serta ringkasan operasional harian.',
   },
   {
     title: 'Manajemen Gudang',
     stack: 'Flutter',
     description:
-      'Aplikasi mobile untuk mendukung pengelolaan stok, pergerakan barang, dan monitoring gudang secara lebih fleksibel.',
+      'Aplikasi mobile untuk membantu pencatatan stok, perpindahan barang, dan monitoring gudang secara fleksibel.',
   },
   {
     title: 'POS Modern',
     stack: 'React JS',
     description:
-      'Aplikasi POS berbasis web dengan antarmuka modern, responsif, dan fokus pada kemudahan penggunaan.',
+      'Aplikasi POS berbasis web dengan tampilan bersih, responsif, dan mudah digunakan untuk kebutuhan operasional.',
   },
 ]
 
@@ -42,6 +42,11 @@ const skills = [
   'Git',
 ]
 
+const quickStats = [
+  { value: '2017', label: 'Mulai berkarier di kelistrikan' },
+  { value: '2020', label: 'Aktif membangun aplikasi' },
+  { value: '4+', label: 'Project digital dikerjakan' },
+]
 
 function App() {
   const [text, setText] = useState('')
@@ -62,7 +67,7 @@ function App() {
       if (index === fullText.length) {
         clearInterval(interval)
       }
-    }, 50) // kecepatan ketik (lebih kecil = lebih cepat)
+    }, 42)
 
     return () => clearInterval(interval)
   }, [])
@@ -77,12 +82,13 @@ function App() {
   return (
     <div className="app-shell">
       <header className="navbar">
-        <div className="brand-logo">
-          <img src={logo} alt="Logo" />
-        </div>
+        <a href="#home" className="brand-logo" aria-label="Back to home">
+          <img src={logo} alt="Logo Donny" />
+          <span>Donny Robiantono</span>
+        </a>
 
-        <nav className="nav-menu">
-          <a href="#home" className="active">Home</a>
+        <nav className="nav-menu" aria-label="Main navigation">
+          <a href="#home">Home</a>
           <a href="#about">About</a>
           <a href="#education">Education</a>
           <a href="#skills">Skills</a>
@@ -95,17 +101,18 @@ function App() {
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           aria-label="Toggle theme"
         >
-          {theme === 'dark' ? 'Light' : 'Dark'}
+          {theme === 'dark' ? 'Mode terang' : 'Mode gelap'}
         </button>
       </header>
 
       <main className="container">
         <section id="home" className="hero">
-          <div className="hero-left">
+          <div className="hero-copy">
+            <p className="eyebrow">Portfolio pribadi</p>
             <h1>
-              Hi, I&apos;am <span className="accent-purple">Donny</span>
+              Hi, saya <span>Donny</span>
               <br />
-              <span className="accent-blue">Robiantono</span>
+              Robiantono.
             </h1>
 
             <h2 className="typing">
@@ -113,68 +120,82 @@ function App() {
               <span className="cursor">|</span>
             </h2>
 
-            <p>
-              Seorang profesional di bidang kelistrikan yang bekerja
-              di PT PLN (Persero) sejak 2017. Sejak 2020, saya juga aktif sebagai Software
-              Engineer dengan pengalaman dalam pengembangan aplikasi web dan mobile untuk
-              mendukung efisiensi operasional dan transformasi digital.
+            <p className="hero-description">
+              Saya bekerja di bidang kelistrikan dan juga membangun aplikasi web maupun
+              mobile untuk membantu pekerjaan operasional menjadi lebih tertata, cepat,
+              dan mudah dipantau.
             </p>
 
             <div className="hero-actions">
-              <a href="#contact" className="btn btn-primary">Hire Me</a>
-              <a href="#projects" className="btn btn-outline">My Portfolio</a>
+              <a href="#projects" className="btn btn-primary">Lihat project</a>
+              <a href="#contact" className="btn btn-outline">Hubungi saya</a>
             </div>
           </div>
 
-          <div className="hero-right">
-            <div className="hero-image-wrap">
+          <div className="hero-visual" aria-label="Profile photo area">
+            <div className="photo-card">
               <img src={profile} alt="Donny Robiantono" className="hero-image" />
+            </div>
+            <div className="note-card">
+              <strong>{experienceYears}+ tahun</strong>
+              <span>pengalaman kerja lapangan dan pengembangan sistem.</span>
             </div>
           </div>
         </section>
 
-        <section id="about" className="section">
+        <section className="stats-row" aria-label="Ringkasan pengalaman">
+          {quickStats.map((item) => (
+            <div key={item.value} className="stat-item">
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </section>
+
+        <section id="about" className="section section-two-column">
           <div className="section-title">
             <span>About</span>
             <h2>Tentang Saya</h2>
           </div>
-          <div className="glass about-card">
+          <div className="content-card about-card">
             <p>
-              Saya memiliki latar belakang profesional di bidang kelistrikan dan pengalaman
-              kerja di lingkungan BUMN, khususnya PT PLN (Persero). Selain itu, saya juga
-              aktif membangun solusi digital menggunakan React JS, CodeIgniter 4, Flutter,
-              Python, dan Node.js.
+              Saya terbiasa berada di lingkungan kerja teknis, khususnya kelistrikan.
+              Di sisi lain, saya juga mengembangkan solusi digital menggunakan React JS,
+              CodeIgniter 4, Flutter, Python, dan Node.js. Bagi saya, aplikasi yang baik
+              bukan hanya terlihat modern, tetapi juga benar-benar membantu pekerjaan harian.
             </p>
           </div>
         </section>
 
         <section id="education" className="section">
-          <div className="section-title">
+          <div className="section-title center-title">
             <span>Education</span>
             <h2>Pendidikan</h2>
           </div>
-          <div className="glass timeline-item">
-            <h3>SMK Negri 2 Kota Probolinggo</h3>
-            <p>Teknik Instalasi Tenaga Listrik</p>
-            <small>
-              Lulusan SMK Tahun 2016 dengan keahlian di bidang instalasi tenaga listrik, yang memberikan dasar yang kuat untuk karir saya di industri kelistrikan.
-            </small>
-          </div>
-          <br />
-          <div className="glass timeline-item">
-            <h3>Universitas Terbuka</h3>
-            <p>Program Studi Sistem Informasi</p>
-            <small>
-              Saat ini saya sedang menempuh pendidikan untuk memperkuat kompetensi di bidang
-              sistem informasi dan teknologi.
-            </small>
+          <div className="timeline">
+            <article className="content-card timeline-item">
+              <span className="timeline-dot" />
+              <h3>SMK Negeri 2 Kota Probolinggo</h3>
+              <p>Teknik Instalasi Tenaga Listrik</p>
+              <small>
+                Lulusan tahun 2016 dengan dasar keahlian instalasi tenaga listrik.
+              </small>
+            </article>
+            <article className="content-card timeline-item">
+              <span className="timeline-dot" />
+              <h3>Universitas Terbuka</h3>
+              <p>Program Studi Sistem Informasi</p>
+              <small>
+                Saat ini sedang memperkuat kompetensi di bidang sistem informasi dan teknologi.
+              </small>
+            </article>
           </div>
         </section>
 
-        <section id="skills" className="section">
+        <section id="skills" className="section section-two-column">
           <div className="section-title">
             <span>Skills</span>
-            <h2>Teknologi yang Saya Kuasai</h2>
+            <h2>Teknologi yang Saya Gunakan</h2>
           </div>
           <div className="skills-grid">
             {skills.map((skill) => (
@@ -186,13 +207,14 @@ function App() {
         </section>
 
         <section id="projects" className="section">
-          <div className="section-title">
+          <div className="section-title center-title">
             <span>Portfolio</span>
             <h2>Project Pilihan</h2>
           </div>
           <div className="projects-grid">
             {projects.map((project, index) => (
               <article key={project.title + index} className="project-card">
+                <span className="project-number">0{index + 1}</span>
                 <span className="project-stack">{project.stack}</span>
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
@@ -201,13 +223,16 @@ function App() {
           </div>
         </section>
 
-        <section id="contact" className="section">
-          <div className="section-title">
-            <span>Contact</span>
-            <h2>Hubungi Saya</h2>
-          </div>
-          <div className="glass about-card">
-            <p>Email: donnyrobiantono3@gmail.com</p>
+        <section id="contact" className="section contact-section">
+          <div className="contact-card">
+            <div>
+              <span className="contact-label">Contact</span>
+              <h2>Mari terhubung.</h2>
+              <p>Terbuka untuk diskusi project, pengembangan aplikasi, atau kolaborasi teknis.</p>
+            </div>
+            <a href="mailto:donnyrobiantono3@gmail.com" className="btn btn-primary">
+              donnyrobiantono3@gmail.com
+            </a>
           </div>
         </section>
       </main>
